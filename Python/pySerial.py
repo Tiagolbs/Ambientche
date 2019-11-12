@@ -6,15 +6,15 @@ import serial
 HOST = 'localhost'     # Endereco IP do Servidor
 PORT = 5002            # Porta que o Servidor esta
 
+comport = serial.Serial('COM5', 9600)	#Inicia a conexao com o arduino
 
 def conectado(con, cliente):
     print('Conectado por', cliente)
 
-    comport = serial.Serial('COM3', 9600)	#Inicia a conexao com o arduino
-    
     while True:
         msg = con.recv(1024)  # Recebe a mensagem
-        if int(msg) >= 2 and int(msg) <= 8:       
+        if int(msg) >= 2 and int(msg) <= 8:
+            print('Ligou led', msg)       
             time.sleep(1.8)
 
             luz = str(chr(int(msg)+48))
