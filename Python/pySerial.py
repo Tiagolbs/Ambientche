@@ -15,8 +15,6 @@ def conectado(con, cliente):
         msg = con.recv(1024)  # Recebe a mensagem
         if int(msg) >= 2 and int(msg) <= 8:
             print('Ligou led', msg)       
-            time.sleep(1.8)
-
             luz = str(chr(int(msg)+48))
             time.sleep(0.1)
             comport.write(str.encode(luz))	#Liga a luz referente ao comodo
