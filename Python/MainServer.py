@@ -1,16 +1,11 @@
+import asyncio
+import websockets
 import socket
-import _thread
-
-HOST = 'localhost'     # Endereco IP do Servidor
-PORT = 5000            # Porta que o Servidor esta
 
 
-def conectado(con, cliente):
-    print('Conectado por', cliente)
-
-
-    while True:
-        msg = con.recv(1024)
+async def echo(websocket, path):
+    async for message in websocket:
+        await websocket.send(message) #Recebe a mensagem por WebSocket
         HostDest1 = 'localhost' #pySQL
         PortDest1 = 5001 #pySQL
         HostDest2 = 'localhost' #pySerial
@@ -20,31 +15,15 @@ def conectado(con, cliente):
         Dest1 = (HostDest1, PortDest1) 
         tcpDest1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         tcpDest1.connect(Dest1)
-        tcpDest1.send(msg) 
+        tcpDest1.send(message.encode()) 
         
         #pySerial
         Dest2 = (HostDest2, PortDest2)
         tcpDest2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         tcpDest2.connect(Dest2)
-        tcpDest2.send(msg)   
+        tcpDest2.send(message.encode())   
+     
+start_server = websockets.serve(echo, "localhost", 5000) #Endereço para iniciar server WebSocket
 
-    print(cliente, msg)
-
-    tcp.close()
-    print ('Finalizando conexao', cliente)
-    con.close()		#Finaliza conexao 
-    _thread.exit()	#Finaliza Thread
-
-
-tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-orig = (HOST, PORT)
-
-tcp.bind(orig)
-tcp.listen(1)
-
-while True:
-	con, cliente = tcp.accept()
-	_thread.start_new_thread(conectado, tuple([con, cliente])) #Inicia a thread com a conexao
-
-tcp.close()
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
