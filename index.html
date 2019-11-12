@@ -19,24 +19,29 @@
         <div class="row">
             <div class="col-sm-2" style="background-color:red;">2</div>
             <div class="col-sm-8">
-              <div>
-                <img src="Comodos/borda.png" class="rounded img-fluid"></img>
-                <div style="display:flow-root;">
-                    <img src="Comodos/quarto.png" class="rounded quarto_class"></img>
-                    <img src="Comodos/cozinha.png" class="rounded img-fluid cozinha_class"></img>
-                    <img src="Comodos/jantar.png" class="rounded img-fluid jantar_class"></img>
-                    <img src="Comodos/corredor.png" class="rounded img-fluid corredor_class"></img>
-                    <img src="Comodos/sala.png" class="rounded img-fluid sala_class"></img>
-                    <img src="Comodos/banheiro.png" class="rounded img-fluid banheiro_class"></img>
-                    <img src="Comodos/banho.png" class="rounded img-fluid banho_class"></img>
-                </div>
-              </div>
+                <img src="comodos_clean.png" width="908" height="810" alt="Comodos" usemap="#map" class="img-fluid">
+                <map id="map" name="map">
+                  <area shape="rect" alt="" title="" coords="24,17,329,485" href="javascript:sendPY(2)" />
+                  <area shape="rect" alt="" title="" coords="343,17,545,356" href="javascript:sendPY(3)" />
+                  <area shape="rect" alt="" title="" coords="558,20,896,483" href="javascript:sendPY(4)" />
+                  <area shape="rect" alt="" title="" coords="557,498,897,800" href="javascript:sendPY(5)" />
+                  <area shape="rect" alt="" title="" coords="236,642,543,798" href="javascript:sendPY(6)" />
+                  <area shape="rect" alt="" title="" coords="24,496,224,799" href="javascript:sendPY(7)" />
+                  <area shape="poly" alt="" title="" coords="237,627,544,629,545,366,343,369,343,497,236,496,235,623,235,624" href="javascript:sendPY(8)" />
+                </map>
             </div>
             <div class="col-sm-2" style="background-color:red;">2</div>
         </div>
     </div>
 
-    
+    <script>
+      function sendPY(comodo){
+        var conn = new WebSocket('ws://localhost:5000');
+        conn.onopen = function(response) {
+        conn.send(comodo);
+      };
+    }
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
