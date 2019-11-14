@@ -23,7 +23,7 @@ async def echo(websocket, path):
         await websocket.send(message) #Recebe a mensagem por WebSocket
         
         print('Recebido: ', message)
-
+        texto = ""
         if str(message) == 'log':
             sql = 'select * from LogStatusLuz'
             cur.execute(sql)
@@ -34,6 +34,7 @@ async def echo(websocket, path):
                 texto += str(rec) + '\n'
 
             asyncio.get_event_loop().run_until_complete(sendToJS())
+            
 
 start_server = websockets.serve(echo, "localhost", 5100) #Endereço para iniciar server WebSocket
 
