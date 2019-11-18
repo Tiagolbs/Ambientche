@@ -9,5 +9,5 @@ Nele, encontra-se:
 
 ## To do
 - [x] Terminar comunicação JS <-> Python 
-- [ ] Incluir Código SQL do BD
-- [ ] Finalizar Front-End + feedback visual do acendimento de luzes
+- [x] Incluir Código SQL do BD
+- [x] Finalizar Front-End + feedback visual do acendimento de luzes
