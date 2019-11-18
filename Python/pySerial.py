@@ -13,7 +13,7 @@ def conectado(con, cliente):
 
     while True:
         msg = con.recv(1024)  # Recebe a mensagem
-        if int(msg) >= 2 and int(msg) <= 8:
+        if int(msg) >= 2 and int(msg) <= 8: #Verifica se a mensagem está correta
             print('Ligou led', msg)       
             luz = str(chr(int(msg)+48))
             time.sleep(0.1)
