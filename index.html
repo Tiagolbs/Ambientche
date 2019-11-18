@@ -7,46 +7,46 @@
     <style>
 
     </style>
-    <title>Hello, world!</title>
+    <title>Ambientche</title>
     <script>
-        var state=false;
+        var state=false; //variavel de controle de inicializacao
         function sendweb(num){
-            if(state==true){
+            if(state==true){ //enviar o pacote apenas se o comando vier apos a incializacao (funcao "resolve()")
                 var conn = new WebSocket('ws://localhost:5000');
                 conn.onopen = function(response) {
                 conn.send(num);
                 };
             }  
         }
-        function resolve(){
-            document.getElementById('area2').click();
-            document.getElementById('area3').click();
-            document.getElementById('area4').click();
-            document.getElementById('area5').click();
-            document.getElementById('area6').click();
-            document.getElementById('area7').click();
+        function resolve(){ //funcao de inicializacao da solucao tecnica
+            document.getElementById('area2').click(); //o maphilight tem uma caracteristica peculiar:
+            document.getElementById('area3').click(); //ao inicializar um map com a opcao alwaysOn,
+            document.getElementById('area4').click(); //eh necessario clicar duas vezes em qualquer area demarcada
+            document.getElementById('area5').click(); //para poder desativar o efeito visual.
+            document.getElementById('area6').click(); //a solucao para este problema eh "clicar" uma vez em cada
+            document.getElementById('area7').click(); //elemento do mapa sem que este cause o envio de um pacote.
             document.getElementById('area8').click();
-            state=true;
+            state=true; //agora a interacao com o mapa podera gerar pacotes
         }
-      </script>
+      </script> <!-- a versao mais atual do jquery nao funciona com o maphilight, portanto, foi necessario utilizar uma versao jurassica para fins de compatibilidade -->
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
       <script src="jquery.maphilight.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
       <script>$(function() {
-                $('.map').maphilight({
+                $('.map').maphilight({ //funcao que define o comportamento de todos os elementos da classe "map" sob o efeito do maphilight
                     fill: true,
 	                fillColor: '000000',
                     fillOpacity: 0.5,
-                    alwaysOn: true
+                    alwaysOn: true //define que o efeito seja aplicado ao carregar a pagina
                 });
 
-                $('#area2').click(function(e) {
+                $('#area2').click(function(e) { //funcao responsavel por remover o filtro do maphilight quando a area do mapa for clicada, as funcoes abaixo idem
                     e.preventDefault();
                     var data = $('#area2').mouseout().data('maphilight') || {};
-                    data.alwaysOn = !data.alwaysOn;
+                    data.alwaysOn = !data.alwaysOn; //inverte efeito always on
                 $('#area2').data('maphilight', data).trigger('alwaysOn.maphilight');
-                sendweb(2);
+                sendweb(2); //chama a funcao responsavel por enviar o pacote para o servidor principal
                 });
 
                 $('#area3').click(function(e) {
@@ -100,19 +100,19 @@
           
         </script>
   </head>
-  <body onload="resolve()">
+  <body onload="resolve()"> <!-- chama a funcao de inicializacao do map ao carregar a pagina -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-9 bg-dark">
                 <img src="comodos_clean.png"  alt="Comodos" usemap="#map" class="img-fluid map">
-                <map id="map" name="map">
-                    <area id="area2" target="" alt="sala" title="sala" href="javascript:sendPY(2)" coords="11,11,319,480" shape="rect">
-                    <area id="area3" target="" alt="banho" title="banho" href="javascript:sendPY(3)" coords="330,11,535,350" shape="rect">
-                    <area id="area4" target="" alt="quarto" title="quarto" href="javascript:sendPY(4)" coords="546,11,886,479" shape="rect">
-                    <area id="area5" target="" alt="corredor" title="corredor" href="javascript:sendPY(5)" coords="331,361,536,359,535,624,225,625,224,489,331,488" shape="poly">
-                    <area id="area6" target="" alt="jantar" title="jantar" href="javascript:sendPY(6)" coords="11,490,214,795" shape="rect">
-                    <area id="area7" target="" alt="banheiro" title="banheiro" href="javascript:sendPY(7)" coords="224,635,534,795" shape="rect">
-                    <area id="area8" target="" alt="cozinha" title="cozinha" href="javascript:sendPY(8)" coords="545,490,886,796" shape="rect">
+                <map id="map" name="map"> <!-- mapa e suas areas -->
+                    <area id="area2" href="#" alt="sala" title="sala" coords="11,11,319,480" shape="rect">
+                    <area id="area3" href="#" alt="banho" title="banho" coords="330,11,535,350" shape="rect">
+                    <area id="area4" href="#" alt="quarto" title="quarto" coords="546,11,886,479" shape="rect">
+                    <area id="area5" href="#" alt="corredor" title="corredor" coords="331,361,536,359,535,624,225,625,224,489,331,488" shape="poly">
+                    <area id="area6" href="#" alt="jantar" title="jantar" coords="11,490,214,795" shape="rect">
+                    <area id="area7" href="#" alt="banheiro" title="banheiro" coords="224,635,534,795" shape="rect">
+                    <area id="area8" href="#" alt="cozinha" title="cozinha" coords="545,490,886,796" shape="rect">
                 </map>
             </div>
             <div class="col-sm-3 bg-dark">
@@ -120,7 +120,7 @@
                     <img src="logo.png" alt="" class="img-fluid">
                     <div style="color:white">
                         <br>
-                        Trabalho realizado com cola e fita por:
+                        Trabalho realizado com cola e fita por: <!-- entende-se por "cola e fita" "solucoes tecnicas" -->
                         <div>
                             <button type="button" class="btn btn-success">Tiago Seben</button>
                             <button type="button" class="btn btn-success">Ricardo Fachinello</button>
@@ -150,9 +150,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-9 bg-dark"></div>
-            <div class="col-sm-3 bg-dark">
-                <span></span>
+            <div class="col-sm-6 bg-dark"></div>
+            <div class="col-sm-6 bg-dark">
+                <div style="float:right">
+                    Nenhuma gambiarra foi utilizada na produção deste trabalho.
+                    <!-- https://sou.gohorseprocess.com.br/ -->
+                </div>
             </div>
         </div>
     </div>
