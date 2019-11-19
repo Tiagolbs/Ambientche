@@ -5,7 +5,7 @@ import psycopg2
 from datetime import datetime
 from getpass import getpass
 
-HOST = '192.168.9.19'              # Endereco IP do Servidor
+HOST = 'localhost'              # Endereco IP do Servidor
 PORT = 5001            # Porta que o Servidor esta
 
 conSql = psycopg2.connect(user = input('User postgres: '),password = getpass('Senha: '),host = input('Host: '),port = input('Porta: '),database = input('Database: ')) #Dados para conexão com o postgresql
