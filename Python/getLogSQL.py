@@ -24,7 +24,7 @@ class Application: #Definição da interface
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
 
-        self.nomeLabel = Label(self.segundoContainer,text="Nome do banco", font=self.fontePadrao)
+        self.nomeLabel = Label(self.segundoContainer,text="Usuário", font=self.fontePadrao)
         self.nomeLabel.pack(side=LEFT)
 
         self.nome = Entry(self.segundoContainer)
