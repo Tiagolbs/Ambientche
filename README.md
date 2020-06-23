@@ -6,8 +6,3 @@ Nele, encontra-se:
 - Cliente de comunicação Servidor Principal <-> Banco de Dados
 - Front-End HTML/JS
 - Logo e Imagem dos Cômodos
-
-## To do
-- [x] Terminar comunicação JS <-> Python 
-- [x] Incluir Código SQL do BD
-- [x] Finalizar Front-End + feedback visual do acendimento de luzes
